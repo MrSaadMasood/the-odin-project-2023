@@ -4,6 +4,10 @@
 
 This project is a CV application that allows users to create and display their resume. It's built using React and includes features such as adding personal information, education details, and work experience. Users can also download their resume in PDF format.
 
+## Project Hosting
+
+The CV application is hosted on Vercel. You can access it [here](https://cv-application-odin-project.vercel.app/).
+
 ![Main Page](https://github.com/MrSaadMasood/the-odin-project-2023/blob/main/project-CV-application/react/src/assets/scrnli_30_11_2023_23-29-41.png?raw=true)
 
 ## Project Structure
@@ -40,9 +44,6 @@ The project is organized into components:
 
 - **Hiding Tasks**: Hide specific education or experience tasks from the displayed resume.
 
-## Project Hosting
-
-The CV application is hosted on Vercel. You can access it [here](https://cv-application-odin-project.vercel.app/).
 
 ## How to Run Locally
 
