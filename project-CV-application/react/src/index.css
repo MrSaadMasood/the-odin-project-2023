@@ -1,0 +1,22 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.add_task{
+    animation: fade .6s forwards ;
+}
+
+@keyframes fade{
+    0% { 
+        opacity: 0;
+        transform: translateY(0);
+    }
+    50%{
+        opacity: .5;
+     
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(12px);
+    }
+}
