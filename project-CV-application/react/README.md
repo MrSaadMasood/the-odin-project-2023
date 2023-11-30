@@ -4,6 +4,8 @@
 
 This project is a CV application that allows users to create and display their resume. It's built using React and includes features such as adding personal information, education details, and work experience. Users can also download their resume in PDF format.
 
+![Main Page](https://github.com/MrSaadMasood/the-odin-project-2023/blob/main/project-CV-application/react/src/assets/scrnli_30_11_2023_23-29-41.png?raw=true)
+
 ## Project Structure
 
 The project is organized into components:
@@ -62,3 +64,12 @@ To run the project locally, follow these steps:
     ```
     npm run dev
     ```
+
+## Contact <a name="contact"></a>
+
+For any inquiries or support, please contact the project owner:
+
+- **Saad Masood**
+- [LinkedIn](https://www.linkedin.com/in/saad-masood-8b100125b/)
+- [GitHub](https://github.com/MrSaadMasood)
+- [email](mrsaadmasood1@gmail.com)
