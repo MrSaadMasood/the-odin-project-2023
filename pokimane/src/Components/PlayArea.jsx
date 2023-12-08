@@ -1,37 +1,66 @@
+import { useState } from "react";
 import Card from "./Card";
 
-export default function PlayArea({isCardClickedFunction, cardClicked, gameDifficulty, gameLevel, storeData, cardData}){
-    let cardIterations;
-    const uselessArray = []
-    if(gameLevel === 1){
-        cardIterations = 5;
-    }
-    else if(gameLevel === 2){
-        cardIterations = 7
-    }
-    else if (gameLevel === 3){
-        cardIterations = 10
-    }
-    if (cardIterations > 0){
-        for (let i = 0; i < cardIterations; i++){
-            uselessArray.push(i)
-        }
-    }
-    function randomNumberGenerator(){
-        return Math.floor((Math.random() * 1000) + 1)
-    }
+export default function PlayArea({
+  isCardClickedFunction,
+  cardClicked,
+  gameDifficulty,
+  gameLevel,
+  storeData,
+  cardData,
+  score,
+  gameLevelSetter,
+  resetClickedCardNames,
+  attemptsTillLevelIncrease,
+  iterations,
+  cardDataArraySetter,
+  arrayWithAllCardData,
+  cardClickedOnLevelIncrease,
+  // cardIterations
+}) {
+  const uselessArray = [];
 
-    return (
-        <div className="absolute play-area top-[55%] left-[50%] w-[90%] h-auto p-2"> 
-            <div className="flex justify-center items-center flex-wrap">
-            {uselessArray.map((_ , index)=>{
-                return (
-                    <div key={index}>
-                        <Card isCardClickedFunction={isCardClickedFunction} cardClicked={cardClicked} gameDifficulty={gameDifficulty} pokeNumber={randomNumberGenerator()} storeData={storeData} cardData={cardData} gameLevel={gameLevel} />
-                    </div>
-                )
-            })}
+  if (iterations > 0) {
+    for (let i = 0; i < iterations; i++) {
+      uselessArray.push(i);
+    }
+  }
+
+  function shuffleArray(array){
+    console.log("the array to shuffle is", array);
+    let j;
+    for (let i = array.length - 1; i > 0 ; i--){
+   
+      j = Math.floor(Math.random() * (i + 1))
+      console.log("the value of j", j);
+      [array[i], array[j]] = [array[j], array[i]]
+    }
+    return array
+  }
+  const cardDataArray = cardClickedOnLevelIncrease === 0 ? arrayWithAllCardData : shuffleArray(arrayWithAllCardData)
+
+
+  return (
+    <div className="absolute play-area top-[55%] left-[50%] w-[90%] h-auto p-2">
+      <div className="flex justify-center items-center flex-wrap">
+        {uselessArray.map((_, index) => {
+          return (
+            <div key={index}>
+              <Card
+                isCardClickedFunction={isCardClickedFunction}
+                cardClicked={cardClicked}
+                gameDifficulty={gameDifficulty}
+                storeData={storeData}
+                cardData={cardData}
+                gameLevel={gameLevel}
+                cardDataArraySetter={cardDataArraySetter}
+                dataInArrayPassed={cardDataArray[index]}
+                cardClickedOnLevelIncrease={cardClickedOnLevelIncrease}
+              />
             </div>
-        </div>
-    )
+          );
+        })}
+      </div>
+    </div>
+  );
 }

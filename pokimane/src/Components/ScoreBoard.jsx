@@ -1,16 +1,16 @@
-export default function ScoreBoard(){
+export default function ScoreBoard({score, topScore, level}){
     return (
         
         <div className="absolute top-4 right-5">
             <div className="font-primary font-bold text-xl text-[#ffc300] ">
                 <p>
-                    Score : 0
+                    Score : {score}
                 </p>
                 <p>
-                    Top Score : 0
+                    Top Score : {topScore}
                 </p>
                 <p>
-                    Level: 0
+                    Level: {level}
                 </p>
             </div>
         </div>
