@@ -269,6 +269,7 @@ export default function App() {
 
   // when the game is over it resets the values to default
   function resetGameFunction() {
+    buttonClickSound.play();
     setInGameSettings((inGameSettings)=>({
       ...inGameSettings,
       level : 0,
