@@ -3,7 +3,7 @@ import ScoreBoard from "./ScoreBoard";
 import PlayArea from "./PlayArea";
 
 export default function GamePlayInterface({
-  exitGame,
+  resetGameFunction,
   isCardClickedFunction,
   cardClicked,
   gameDifficulty,
@@ -20,7 +20,7 @@ export default function GamePlayInterface({
 }) {
   return (
     <>
-      <InGameLogo exitGame={exitGame} />
+      <InGameLogo resetGameFunction={resetGameFunction} />
       <ScoreBoard score={score} topScore={topScore} level={gameLevel} />
       <PlayArea
         isCardClickedFunction={isCardClickedFunction}

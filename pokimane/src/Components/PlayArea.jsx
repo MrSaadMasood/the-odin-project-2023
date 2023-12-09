@@ -10,6 +10,8 @@ export default function PlayArea({
   arrayWithAllCardData,
   cardClickedOnLevelIncrease,
 }) {
+  // depending updon the number of cards needed, number are added into it so that they the array can be mapped and the 
+  // cards can be generated
   const uselessArray = [];
 
   if (iterations > 0) {
@@ -18,6 +20,7 @@ export default function PlayArea({
     }
   }
 
+  // it randomly shuffles th array
   function shuffleArray(array) {
     let j;
     for (let i = array.length - 1; i > 0; i--) {
@@ -26,6 +29,9 @@ export default function PlayArea({
     }
     return array;
   }
+
+  // if on level increase no card is clicked it displays them in their generation / original order
+  // if a card is clicked it shuffles the array
   const cardDataArray =
     cardClickedOnLevelIncrease === 0
       ? arrayWithAllCardData
