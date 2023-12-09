@@ -1,57 +1,52 @@
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 @font-face {
   font-family: BubblegumSans;
-  src: url("./assets/Fonts/BubblegumSans-Regular.ttf") format("opentype");
+  src: url("/assets/Fonts/BubblegumSans-Regular.ttf") format("opentype");
+}
+html {
+  cursor: url("/assets/cursor.png"), auto;
+}
+.logo {
+  transform: translate(-50%, -50%);
 }
 
-.logo{
+.play-area {
   transform: translate(-50%, -50%);
 }
-/* .in-game-logo{
-  transform: rotate(-45deg);
-} */
-.play-area{
+.game-over {
   transform: translate(-50%, -50%);
 }
-.game-over{
+.loading {
   transform: translate(-50%, -50%);
 }
-.loading{
-  transform: translate(-50%, -50%);
-}
-.menu{
+.menu {
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%); 
+  transform: translate(-50%, -50%);
 }
-.background{
-  background-image: url("./assets/background.jpg");
+.background {
+  background-image: url("/assets/background.jpg");
   background-size: cover;
   background-position: center;
-  opacity: .98;
+  opacity: 0.98;
 }
 
 .card {
-
   perspective: 1000px;
   transform-style: preserve-3d;
   transition: transform 1s;
   transform-origin: center;
-  cursor: pointer;
 }
 
 .card-face {
   backface-visibility: hidden;
 }
 
-
-
 .card-back {
-  background-image: url("./assets/back.jpg");
+  background-image: url("/assets/back.jpg");
   background-size: cover;
   transform: rotateY(180deg);
 }
@@ -60,15 +55,12 @@
   transform: rotateY(180deg);
 }
 
-
-
-
-.box-contents{
-  box-shadow: 0 0 50px rgba(0, 0, 0, .3);
+.box-contents {
+  box-shadow: 0 0 50px rgba(0, 0, 0, 0.3);
 }
-.hover-point{
-  height: calc(100% /3);
-  width: calc(100% /3);
+.hover-point {
+  height: calc(100% / 3);
+  width: calc(100% / 3);
   z-index: 2;
   position: absolute;
 }
@@ -106,43 +98,30 @@
 }
 
 .hover-point:nth-child(1):hover ~ .box-contents {
-  /* box-shadow: 15px 15px 50px rgba(0, 0, 0, .3); */
   transform-origin: right top;
   transform: perspective(1000px) rotateX(10deg) rotateY(-10deg) rotateZ(2deg);
 }
 .hover-point:nth-child(2):hover ~ .box-contents {
-  /* box-shadow: 0 15px 50px rgba(0, 0, 0, .3); */
   transform-origin: center top;
   transform: perspective(1000px) rotateX(10deg);
 }
 .hover-point:nth-child(3):hover ~ .box-contents {
-  /* box-shadow: -15px 15px 50px rgba(0, 0, 0, .3); */
   transform-origin: left top;
   transform: perspective(1000px) rotateX(10deg) rotateY(10deg) rotateZ(-2deg);
 }
 .hover-point:nth-child(4):hover ~ .box-contents {
-  /* box-shadow: 15px 5px 50px rgba(0, 0, 0, .3); */
   transform-origin: left center;
   transform: perspective(1000px) rotateY(-10deg);
 }
 .hover-point:nth-child(5):hover ~ .box-contents {
-  /* box-shadow: -15px 5px 50px rgba(0, 0, 0, .3); */
-  transform-origin: right center;
   transform: perspective(1000px) rotateY(10deg);
 }
 .hover-point:nth-child(6):hover ~ .box-contents {
-  /* box-shadow: 15px -15px 50px rgba(0, 0, 0, .3); */
-  transform-origin: right bottom;
   transform: perspective(1000px) rotateX(-10deg) rotateY(-10deg) rotateZ(-2deg);
 }
 .hover-point:nth-child(7):hover ~ .box-contents {
-  /* box-shadow: 0 -15px 50px rgba(0, 0, 0, .3); */
-  transform-origin: center bottom;
   transform: perspective(1000px) rotateX(-10deg);
 }
 .hover-point:nth-child(8):hover ~ .box-contents {
-  /* box-shadow: -15px -15px 50px rgba(0, 0, 0, .3); */
-  transform-origin: left bottom;
   transform: perspective(1000px) rotateX(-10deg) rotateY(10deg) rotateZ(2deg);
 }
-

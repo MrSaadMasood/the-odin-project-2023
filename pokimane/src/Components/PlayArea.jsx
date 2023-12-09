@@ -1,4 +1,3 @@
-import { useState } from "react";
 import Card from "./Card";
 
 export default function PlayArea({
@@ -6,17 +5,10 @@ export default function PlayArea({
   cardClicked,
   gameDifficulty,
   gameLevel,
-  storeData,
-  cardData,
-  score,
-  gameLevelSetter,
-  resetClickedCardNames,
-  attemptsTillLevelIncrease,
   iterations,
   cardDataArraySetter,
   arrayWithAllCardData,
   cardClickedOnLevelIncrease,
-  // cardIterations
 }) {
   const uselessArray = [];
 
@@ -26,19 +18,18 @@ export default function PlayArea({
     }
   }
 
-  function shuffleArray(array){
-    console.log("the array to shuffle is", array);
+  function shuffleArray(array) {
     let j;
-    for (let i = array.length - 1; i > 0 ; i--){
-   
-      j = Math.floor(Math.random() * (i + 1))
-      console.log("the value of j", j);
-      [array[i], array[j]] = [array[j], array[i]]
+    for (let i = array.length - 1; i > 0; i--) {
+      j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
     }
-    return array
+    return array;
   }
-  const cardDataArray = cardClickedOnLevelIncrease === 0 ? arrayWithAllCardData : shuffleArray(arrayWithAllCardData)
-
+  const cardDataArray =
+    cardClickedOnLevelIncrease === 0
+      ? arrayWithAllCardData
+      : shuffleArray(arrayWithAllCardData);
 
   return (
     <div className="absolute play-area top-[55%] left-[50%] w-[90%] h-auto p-2">
@@ -50,8 +41,6 @@ export default function PlayArea({
                 isCardClickedFunction={isCardClickedFunction}
                 cardClicked={cardClicked}
                 gameDifficulty={gameDifficulty}
-                storeData={storeData}
-                cardData={cardData}
                 gameLevel={gameLevel}
                 cardDataArraySetter={cardDataArraySetter}
                 dataInArrayPassed={cardDataArray[index]}

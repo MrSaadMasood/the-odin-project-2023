@@ -4,12 +4,12 @@ export default function GameOver({ result, topScore, resetGameFunction }) {
   return (
     <>
       <div className="game-over  h-56 absolute top-[50%] left-[50%] flex flex-col justify-center items-center">
-        <div className="flex flex-col justify-center items-center font-primary cursor-pointer text-[#ffc300] font-bold text-5xl sm:text-6xl md:text-7xl lg:text-8xl w-72 sm:w-96 md:w-[30rem] lg:w-[37rem]">
+        <div className="flex flex-col justify-center items-center font-primary text-[#ffc300] font-bold text-5xl sm:text-6xl md:text-7xl lg:text-8xl w-72 sm:w-96 md:w-[30rem] lg:w-[37rem]">
           <p>{gameEnding}</p>
           {result === "Lose" ? <p>{tryAgain}</p> : ""}
         </div>
         <div className="font-primary text-[#ffc300] sm:text-xl md:text-2xl lg:text-3xl mt-2">
-          <p>Top Score: {topScore - 1}</p>
+          <p>Top Score: {topScore}</p>
         </div>
         <div className="flex justify-center items-center mt-2 lg:mt-2 font-primary font-bold ">
           <button

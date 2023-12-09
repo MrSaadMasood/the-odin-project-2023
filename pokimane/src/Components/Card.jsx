@@ -1,24 +1,18 @@
-import sampleImage from "../assets/sampleImage.jpg";
-import back from "../assets/back.jpg";
 import { useEffect, useState, useRef } from "react";
 
 export default function Card({
   isCardClickedFunction,
   cardClicked,
   gameDifficulty,
-  storeData,
-  cardData,
   gameLevel,
-  addDataToArray,
   cardDataArraySetter,
   dataInArrayPassed,
-  cardClickedOnLevelIncrease
+  cardClickedOnLevelIncrease,
 }) {
   const isFirstRender = useRef(true);
-  // console.log("the card data is", cardData);
   const [pokeData, setPokeData] = useState({});
-  // console.log("the data passed in card is", dataInArrayPassed);
-  const dataToUse = cardClickedOnLevelIncrease ===  0 ? pokeData : dataInArrayPassed
+  const dataToUse =
+    cardClickedOnLevelIncrease === 0 ? pokeData : dataInArrayPassed;
   const easySizeSettings =
     "w-16 h-24 sm:w-24 sm:h-36 md:w-32 md:h-44 lg:w-[5.5rem] lg:h-[7rem]";
   const hardSizeSettings =
@@ -26,7 +20,6 @@ export default function Card({
   const isGameEasy =
     gameDifficulty === "Easy" ? easySizeSettings : hardSizeSettings;
 
-  //   console.log("the pokemon data is",pokeData);
   useEffect(() => {
     if (isFirstRender.current) {
       isFirstRender.current = false;
@@ -36,7 +29,6 @@ export default function Card({
       const url = `https://pokeapi.co/api/v2/pokemon/${Math.floor(
         Math.random() * 1000 + 1
       )}`;
-      console.log("the url inside is", url);
       const fetcher = async () => {
         const result = await fetch(url);
         const data = await result.json();
@@ -49,16 +41,15 @@ export default function Card({
           image: result.sprites["front_default"],
           id: result.id,
         });
-        // storeData(result)
       });
     }
   }, [gameLevel]);
 
-  useEffect(()=>{
-      if(Object.keys(pokeData).length > 0){
-        cardDataArraySetter(dataToUse)
-  }
-  },[pokeData])
+  useEffect(() => {
+    if (Object.keys(pokeData).length > 0) {
+      cardDataArraySetter(dataToUse);
+    }
+  }, [pokeData]);
   return (
     <div
       className={`container ${isGameEasy} rounded-md overflow-hidden relative mt-2 ml-3 md:mt-4 md:ml-5`}

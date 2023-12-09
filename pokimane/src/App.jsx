@@ -1,8 +1,17 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import SelectMode from "./Components/SelectMode";
 import Logo from "./Components/Logo";
 import GameOver from "./Components/GameOver";
 import GamePlayInterface from "./Components/GamePlayInterface";
+
+import flipcardSound from "/assets/Sounds/flipcard-91468.mp3";
+import outAudio from "/assets/Sounds/intro_track.mp3";
+import levelUp from "/assets/Sounds/levelup.mp3";
+import winSound from "/assets/Sounds/win.mp3";
+import loseSound from "/assets/Sounds/lose.mp3";
+import buttonClick from "/assets/Sounds/click.wav";
+
+import playAudio from "./playAudio";
 
 export default function App() {
   const [generalGameSettings, setGeneralGameSettings] = useState({
@@ -16,43 +25,64 @@ export default function App() {
     topScore: 0,
     level: 0,
   });
-  const [ gameMode, setGameMode] = useState("")
-  const [cardData, setCardData] = useState([]);
+  const [gameMode, setGameMode] = useState("");
   const [clickedCardNames, setClickedCardNames] = useState([]);
-  // console.log("the level is", inGameSettings.level);
   const [isCardClicked, setIsCardClicked] = useState(false);
   const [gameDifficulty, setGameDifficulty] = useState("");
   const [gameResult, setGameResult] = useState("Lose");
-  const [attemptsRemainingCounter, setAttemptsRemainingCounter] = useState(null)
-  const [countIterations , setCountIterations] = useState(null)
-  const [arrayWithAllCardData , setArrayWithAllCardData] = useState([])
-  const [ cardClickedOnLevelIncrease, setCardClickedOnLevelIncrease] = useState(0)
+  const [attemptsRemainingCounter, setAttemptsRemainingCounter] =
+    useState(null);
+  const [countIterations, setCountIterations] = useState(null);
+  const [arrayWithAllCardData, setArrayWithAllCardData] = useState([]);
+  const [cardClickedOnLevelIncrease, setCardClickedOnLevelIncrease] =
+    useState(0);
+  const outroAudio = useRef(new Audio(outAudio));
+  const buttonClickSound = new Audio(buttonClick);
 
-  // console.log("the clicked card namees are", clickedCardNames);
+  buttonClickSound.volume = 0.4;
   const booleanToDisplayMenu =
     generalGameSettings.isGameModeSelected || generalGameSettings.isGameOver;
 
-  // console.log("different cards", numberofDifferentCardsClicked);
+  useEffect(() => {
+    if (inGameSettings.level > 1 && inGameSettings.level < 4) {
+      const leveledUp = new Audio(levelUp);
+      leveledUp.volume = 0.5;
+      leveledUp.play();
+    }
+  }, [inGameSettings.level]);
 
-  // if(numberofDifferentCardsClicked > 0 && numberofDifferentCardsClicked === inGameSettings.score){
+  useEffect(() => {
+    const gameWonSound = new Audio(winSound);
+    const gameLoseSound = new Audio(loseSound);
+    if (generalGameSettings.isGameOver) {
+      gameResult === "Win" ? gameWonSound.play() : gameLoseSound.play();
+      setTimeout(() => {
+        outroAudio.current.volume = 0.2;
+        outroAudio.current.play();
+      }, 2000);
+    } else {
+      outroAudio.current.pause();
+      outroAudio.current.currentTime = 0;
+    }
+  }, [generalGameSettings.isGameOver, gameResult]);
 
-  //   gameLevelSetter(inGameSettings.level + 1)
-  // }
-  // console.log("the attempt remaining are", attemptsRemainingCounter);
-
+  useEffect(() => {
+    if (generalGameSettings.isGameModeSelected && isCardClicked) {
+      const cardFlipSound = new Audio(flipcardSound);
+      playAudio(cardFlipSound);
+    }
+  }, [generalGameSettings.isGameModeSelected, isCardClicked]);
   function flipCard(e, pokeData) {
-    setAttemptsRemainingCounter(attemptsRemainingCounter - 1)
+    setAttemptsRemainingCounter((prevCounter) => prevCounter - 1);
     setIsCardClicked(!isCardClicked);
     gameScoreSetter(inGameSettings.score + 1);
     storeDataOfCardClicked(pokeData);
-    setCardClickedOnLevelIncrease(1)
-    if(attemptsRemainingCounter === 1){
-      // console.log("increasing the level");
-      gameLevelSetter(inGameSettings.level + 1, gameMode)
-      resetClickedCardNamesFuntion()
+    setCardClickedOnLevelIncrease(1);
+    if (attemptsRemainingCounter === 1) {
+      gameLevelSetter(inGameSettings.level + 1, gameMode);
+      resetClickedCardNamesFuntion();
     }
   }
-
 
   if (isCardClicked) {
     setTimeout(() => {
@@ -60,8 +90,8 @@ export default function App() {
     }, 1200);
   }
 
-  function attemptsTillLevelIncrease(value){
-    setAttemptsRemainingCounter(value)
+  function attemptsTillLevelIncrease(value) {
+    setAttemptsRemainingCounter(value);
   }
 
   function generalsettingSetter(selectedMode) {
@@ -74,36 +104,29 @@ export default function App() {
   }
 
   function gameLevelSetter(level, mode) {
-    // console.log("inside game level setter", level ) ;
-    // console.log("inside game level setter", mode ) ;
-    // console.log("inside game level score", typeof inGameSettings.score ) ;
-    // console.log("inside game level setter", (mode === "Easy" && level >= 3 && inGameSettings.score >= 5 ) );
-    setCardClickedOnLevelIncrease(0)
-    setArrayWithAllCardData([])
-    if(mode === "Easy" && level >= 3 && inGameSettings.score >= 21){
+    setCardClickedOnLevelIncrease(0);
+    setArrayWithAllCardData([]);
+    if (mode === "Easy" && level >= 3 && inGameSettings.score >= 21) {
       setTimeout(() => {
-        gameEndFunction()
-        setGameResult("Win")
+        gameEndFunction();
+        setGameResult("Win");
       }, 500);
-    }
-    else if(mode === "Hard" && level >= 3 && inGameSettings.score >= 67){
+    } else if (mode === "Hard" && level >= 3 && inGameSettings.score >= 67) {
       setTimeout(() => {
-        gameEndFunction()
-        setGameResult("Win")
+        gameEndFunction();
+        setGameResult("Win");
       }, 500);
-    }
-    else{
-      iterationsSetterFunction(level, mode)
+    } else {
+      iterationsSetterFunction(level, mode);
       setInGameSettings((inGameSettings) => ({
         ...inGameSettings,
         level: level,
       }));
     }
-
   }
-  function gameEndFunction(){
+  function gameEndFunction() {
     gameTopScoreSetter();
-    setCardClickedOnLevelIncrease(0)
+    setCardClickedOnLevelIncrease(0);
     setGeneralGameSettings((generalGameSettings) => ({
       ...generalGameSettings,
       isGameModeSelected: false,
@@ -130,44 +153,35 @@ export default function App() {
     });
   }
 
-  // console.log("the card iterations are", countIterations);
-  function iterationsSetterFunction(level, mode){
-    // console.log("the mode is", mode);
-    // console.log("the level is", level);
-    if(mode === "Easy"){
-      if(level === 1){
-        setCountIterations(5)
-        attemptsTillLevelIncrease(5)
+  function iterationsSetterFunction(level, mode) {
+    if (mode === "Easy") {
+      if (level === 1) {
+        setCountIterations(5);
+        attemptsTillLevelIncrease(5);
+      } else if (level === 2) {
+        setCountIterations(7);
+        attemptsTillLevelIncrease(7);
+      } else {
+        setCountIterations(10);
+        attemptsTillLevelIncrease(10);
       }
-      else if (level === 2){
-        setCountIterations(7)
-        attemptsTillLevelIncrease(7)
-
-      }
-      else {
-        setCountIterations(10)
-        attemptsTillLevelIncrease(10)
-      }
-    }
-    else if (mode === "Hard"){
-      if(level === 1){
-        setCountIterations(15)
-        attemptsTillLevelIncrease(15)
-      }
-      else if (level === 2){
-        setCountIterations(23)
-        attemptsTillLevelIncrease(23)
-      }
-      else {
-        setCountIterations(30)
-        attemptsTillLevelIncrease(30)
+    } else if (mode === "Hard") {
+      if (level === 1) {
+        setCountIterations(15);
+        attemptsTillLevelIncrease(15);
+      } else if (level === 2) {
+        setCountIterations(23);
+        attemptsTillLevelIncrease(23);
+      } else {
+        setCountIterations(30);
+        attemptsTillLevelIncrease(30);
       }
     }
   }
   const modeSetFunction = (e) => {
-    console.log(e.target.textContent);
+    buttonClickSound.play();
     const selectedMode = e.target.textContent;
-    setGameMode(selectedMode)
+    setGameMode(selectedMode);
     if (selectedMode === "Easy") {
       generalsettingSetter(selectedMode);
       gameLevelSetter(1, selectedMode);
@@ -177,22 +191,10 @@ export default function App() {
     }
   };
 
-  function storeData(data) {
-    setCardData((cardData) => [
-      ...cardData,
-      {
-        name: data.name,
-        image: data.sprites["front_default"],
-        id: data.id,
-      },
-    ]);
-  }
-
   function storeDataOfCardClicked(pokeData) {
     const pokemonName = pokeData.name;
-    console.log("the name of clicked pokemon is ", pokemonName);
     if (clickedCardNames.includes(pokemonName)) {
-      gameEndFunction()
+      gameEndFunction();
     } else {
       setClickedCardNames((clickedCardNames) => [
         ...clickedCardNames,
@@ -217,14 +219,20 @@ export default function App() {
     });
     resetClickedCardNamesFuntion();
   }
-  function cardDataArraySetter(data){
-    console.log("the data is", data);
-    setArrayWithAllCardData((arrayWithAllCardData)=>{
+  function cardDataArraySetter(data) {
+    setArrayWithAllCardData((arrayWithAllCardData) => {
       const updatedArray = [...arrayWithAllCardData, data];
-      // const updatedArray = prevArray.push(data)
-      return updatedArray
-    })
+      return updatedArray;
+    });
   }
+  function exitGame() {
+    setGeneralGameSettings(() => ({
+      isGameModeSelected: false,
+      isGameOver: false,
+      isGamePlayed: false,
+    }));
+  }
+
   return (
     <>
       <div className="relative ">
@@ -237,12 +245,11 @@ export default function App() {
         )}
         {generalGameSettings.isGamePlayed === true ? (
           <GamePlayInterface
+            exitGame={exitGame}
             isCardClickedFunction={flipCard}
             cardClicked={isCardClicked}
             gameDifficulty={gameDifficulty}
             gameLevel={inGameSettings.level}
-            storeData={storeData}
-            cardData={cardData}
             score={inGameSettings.score}
             topScore={inGameSettings.topScore}
             gameLevelSetter={gameLevelSetter}
