@@ -2,6 +2,10 @@
 
 Welcome to the Memory Card Game project! This web application is a captivating and interactive memory game where players can challenge themselves to match pairs of cards. The game is designed with different difficulty levels and incorporates an engaging user interface to provide an enjoyable experience.
 
+## [Live Demo](https://pokimane-memory-card-game.vercel.app/)
+
+![Screenshot](https://github.com/MrSaadMasood/the-odin-project-2023/blob/main/pokimane/public/assets/screenshot.png?raw=true)
+
 ## Table of Contents
 
 - [Introduction](#introduction)
@@ -107,8 +111,3 @@ For any inquiries or support, please contact the project owner:
 
 ---
 
-**Live Demo: [Your Live Link Here]** (Replace with your live deployment link)
-
-Enjoy the Memory Card Game! If you have any questions or feedback, feel free to reach out.
-
-**Note:** Make sure to replace "[Your Live Link Here]" with the actual live link once you deploy the application.
