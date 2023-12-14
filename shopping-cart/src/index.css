@@ -1,0 +1,70 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.background{
+    background-image: url("/background.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    object-fit: cover;
+}
+@media screen and (max-width: 1024px) {
+    .gameEagle{
+        top: 35%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        
+    }
+}
+@media screen and (min-width: 1024px) {
+    .gameEagle{
+        top: 50%;
+        left: 22%;
+        transform: translate(-50%, -50%);
+        
+    }
+}
+@media screen and (min-width: 1280px) {
+    .gameEagle{
+        top: 45%;
+        left: 20%;
+        transform: translate(-50%, -50%);
+        
+    }
+}
+
+
+.transparent{
+    background-color: rgba(255, 255, 255, .2);
+}
+
+@media screen and (max-width: 1024px) {
+    .quick{
+        top: 73%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+}
+@media screen and (min-width: 1024px) {
+    .quick{
+        top: 50%;
+        left: 86%;
+        transform: translate(-50%, -50%);
+    }
+}
+@media screen and (min-width: 1280px) {
+    .quick{
+        top: 45%;
+        left: 89%;
+        transform: translate(-50%, -50%);
+    }
+}
+
+.noScroll::-webkit-scrollbar{
+    display: none;
+}
+.gradient{
+    background: rgb(0,0,0);
+    background: linear-gradient(90deg, rgba(0,0,0,1) 0%, rgba(39,39,39,1) 42%, rgba(50,50,50,1) 100%);
+}
