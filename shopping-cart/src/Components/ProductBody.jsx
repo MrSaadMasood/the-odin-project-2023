@@ -4,14 +4,14 @@ import Platforms from "./PlatformOptions";
 import TopGames from "./TopGames";
 import { Outlet } from "react-router-dom";
 import useFetch from "./useFetch";
-import { Fragment, useContext, useReducer, useState } from "react";
+import { Fragment, useContext, useReducer } from "react";
 import { reducer } from "./reducer";
 import { cart } from "./cartContext";
 
 // icons
 import { GrFormNext } from "react-icons/gr";
 import { GrFormPrevious } from "react-icons/gr";
-import CartBar from "./CartBar";
+import { BallTriangle } from "react-loader-spinner";
 
 const SidePanel = () => {
   return (
@@ -27,7 +27,8 @@ const SidePanel = () => {
 };
 
 const ProductList = () => {
-  const [gameData, loading, error] = useFetch();
+  const contextObject = useContext(cart);
+  const [gameData, loading, error] = useFetch(contextObject.selectedGenre);
   const [currentPage, dispatch] = useReducer(reducer, 1);
   const previousPage = currentPage - 1;
   const nextPage = currentPage + 1;
@@ -36,7 +37,6 @@ const ProductList = () => {
   const endingIndex = currentPage * itemsPerPage;
   const buttonColorIf0 = previousPage !== 0 ? "bg-[#323232]" : "b-[#717171]";
   const buttonColorIf5 = nextPage !== 5 ? "bg-[#323232]" : "b-[#717171]";
-  console.log(gameData);
   let currentPageCards;
   if (gameData) {
     currentPageCards = gameData.slice(startingIndex, endingIndex);
@@ -48,9 +48,28 @@ const ProductList = () => {
         className="bg-black w-full h-[52rem] md:h-[52rem] text-white flex justify-center items-center
     overflow-y-scroll relative"
       >
-        Loading
+        <BallTriangle
+          height={80}
+          width={800}
+          radius={5}
+          color="#4fa94d"
+          ariaLabel="ball-triangle-loading"
+          wrapperClass={{}}
+          wrapperStyle=""
+          visible={true}
+        />
       </div>
     );
+  }
+
+  if(error){
+    return (
+      <div
+      className="bg-black w-full h-[52rem] md:h-[52rem] text-white font-bold text-4xl flex justify-center items-center
+  overflow-y-scroll relative"
+    >Oops Some Error Occured
+    </div>
+    )
   }
   return (
     <div

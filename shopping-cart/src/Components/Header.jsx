@@ -2,7 +2,9 @@ import { useContext } from "react";
 import { CiShoppingCart } from "react-icons/ci";
 import { cart } from "./cartContext";
 
-const Counter = ({value}) => {
+import { PropTypes } from "prop-types";
+
+const Counter = ({ value }) => {
   return (
     <div
       className="counter w-5 h-5 flex justify-center
@@ -14,9 +16,7 @@ const Counter = ({value}) => {
 };
 
 const Header = ({ cartClickedSetter }) => {
-  const { totalItemsinCarts} =
-    useContext(cart);
-  console.log("the context data is",totalItemsinCarts);
+  const { totalItemsinCarts } = useContext(cart);
 
   return (
     <div className="productHeader bg-black w-full h-24 text-white flex justify-start items-center  relative">
@@ -29,14 +29,12 @@ const Header = ({ cartClickedSetter }) => {
       <div className="text-white text-3xl cursor-pointer font-bold hidden sm:hidden lg:block absolute lg:left-[5.2rem] ">
         Game Eagle
       </div>
-      <div className="cart w-2 absolute top-[28%] right-12 lg:right-14 cursor-pointer">
+      <div
+        className="cart w-2 absolute top-[28%] right-12 lg:right-14 cursor-pointer"
+        onClick={cartClickedSetter}
+      >
         <div className="flex w-12 relative">
-          <CiShoppingCart
-            className="hover:scale-105"
-            size={40}
-            color="white"
-            onClick={cartClickedSetter}
-          />
+          <CiShoppingCart className="hover:scale-105" size={40} color="white" />
           <Counter value={totalItemsinCarts} />
         </div>
       </div>
@@ -44,4 +42,11 @@ const Header = ({ cartClickedSetter }) => {
   );
 };
 
+Header.propTypes = {
+  cartClickedSetter : PropTypes.func,
+}
+
+Counter.propTypes = {
+  value : PropTypes.number
+}
 export default Header;
