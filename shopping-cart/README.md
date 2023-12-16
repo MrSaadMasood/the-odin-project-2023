@@ -15,7 +15,8 @@ Welcome to the Shopping Cart project! This web application allows users to explo
 
 ## Live Demo
 
-[Check out the live demo here](#)
+[Check out the live demo here](https://the-odin-project-2023.vercel.app/)
+![Screenshot]()
 
 ## Introduction
 
