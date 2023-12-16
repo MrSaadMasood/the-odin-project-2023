@@ -4,7 +4,7 @@ Welcome to the Memory Card Game project! This web application is a captivating a
 
 ## [Live Demo](https://pokimane-memory-card-game.vercel.app/)
 
-![Screenshot](https://github.com/MrSaadMasood/the-odin-project-2023/blob/main/pokimane/public/assets/screenshot.png?raw=true)
+[![Screenshot](https://github.com/MrSaadMasood/the-odin-project-2023/blob/main/shopping-cart/public/screenshot.png?raw=true)
 
 ## Table of Contents
 
