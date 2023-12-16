@@ -8,9 +8,9 @@ const Home = () => {
     <div className="background w-[full] h-[58rem] relative">
       <div
         className="logo absolute top-3 left-2 w-16 sm:w-20 sm:top-7 sm:left-5 md:w-24 md:top-5 md:left-5 lg:w-28 
-            lg:top-5 lg:left-5 xl:w-32 xl:top-5 xl:left-5"
+            lg:top-5 lg:left-5 xl:w-32 xl:top-5 xl:left-5 cursor-pointer"
       >
-        <img src="/logo.png" alt="" />
+        <img src="/logo2.png" alt="" />
       </div>
       <button
         className=" absolute top-7 right-0 w-16 sm:w-20 sm:top-9 sm:right-0 md:w-24 md:top-9 md:right-0 lg:w-28 

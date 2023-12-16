@@ -103,7 +103,7 @@ const ItemsForCheckout = ({ item, quantityManager }) => {
         className="h-[4.3rem]  w-44 ml-1 flex flex-col justify-center items-start  text-sm overflow-hidden"
         onClick={changePage}
       >
-        <p className="text-lg w-44 font-bold overflow-hidden">{item.name}</p>
+        <p className="text-lg h-8 w-44 font-bold overflow-hidden">{item.name}</p>
         <p className="text-xs font-bold">Price : ${item.price}</p>
         <p className="text-xs font-bold">Quantity : {item.quantity}</p>
       </div>
