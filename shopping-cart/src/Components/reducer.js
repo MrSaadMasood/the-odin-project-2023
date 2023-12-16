@@ -1,3 +1,4 @@
+// a reducer function that takes a state and the action object and return the value based on the action.type
 function reducer(state, action) {
   switch (action.type) {
     case "increase":
