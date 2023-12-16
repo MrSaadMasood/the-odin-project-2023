@@ -3,8 +3,9 @@ import { FaPlaystation } from "react-icons/fa";
 import { FaXbox } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
-import {PropTypes} from "prop-types"
+import { PropTypes } from "prop-types";
 
+// when product card is clicked the user is redirected to the description page
 const ProductCard = ({ game }) => {
   return (
     <Link
@@ -40,6 +41,6 @@ const ProductCard = ({ game }) => {
 };
 
 ProductCard.propTypes = {
-    game : PropTypes.object
-}
+  game: PropTypes.object,
+};
 export default ProductCard;

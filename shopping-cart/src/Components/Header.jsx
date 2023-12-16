@@ -1,22 +1,8 @@
-import { useContext } from "react";
 import { CiShoppingCart } from "react-icons/ci";
-import { cart } from "./cartContext";
-
 import { PropTypes } from "prop-types";
 
-const Counter = ({ value }) => {
-  return (
-    <div
-      className="counter w-5 h-5 flex justify-center
-        items-center bg-red-600 rounded-full absolute right-0 align-top text-xs"
-    >
-      {value}
-    </div>
-  );
-};
 
-const Header = ({ cartClickedSetter }) => {
-  const { totalItemsinCarts } = useContext(cart);
+const Header = ({ cartClickedSetter, totalItemsinCarts }) => {
 
   return (
     <div className="productHeader bg-black w-full h-24 text-white flex justify-start items-center  relative">
@@ -42,11 +28,23 @@ const Header = ({ cartClickedSetter }) => {
   );
 };
 
+const Counter = ({ value }) => {
+  return (
+    <div
+      className="counter w-5 h-5 flex justify-center
+        items-center bg-red-600 rounded-full absolute right-0 align-top text-xs"
+    >
+      {value}
+    </div>
+  );
+};
+
 Header.propTypes = {
-  cartClickedSetter : PropTypes.func,
-}
+  cartClickedSetter: PropTypes.func,
+  totalItemsinCarts : PropTypes.number,
+};
 
 Counter.propTypes = {
-  value : PropTypes.number
-}
+  value: PropTypes.number,
+};
 export default Header;

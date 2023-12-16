@@ -13,6 +13,28 @@ import { GrFormNext } from "react-icons/gr";
 import { GrFormPrevious } from "react-icons/gr";
 import { BallTriangle } from "react-loader-spinner";
 
+// product body is set to outlet if no card is clicked, the list of card is shown.
+// if a card is clicked than the sidebar and list are replaced by another page containing product information
+const ProductBody = () => {
+  return (
+    <>
+      <div className="flex">
+        <Outlet />
+      </div>
+    </>
+  );
+};
+
+const ProductMainPageBody = () => {
+  return (
+    <>
+      <SidePanel />
+      <ProductList />
+    </>
+  );
+};
+
+// side panel is not displayed in smaller screens but is available for larger screens
 const SidePanel = () => {
   return (
     <div className="options noScroll bg-black hidden sm:hidden md:block md:w-[30%] lg:w-[25%] xl:w-[18%] h-[52rem] overflow-y-scroll">
@@ -26,22 +48,31 @@ const SidePanel = () => {
   );
 };
 
+// the component that holds all the cards containing the information of different games
 const ProductList = () => {
+  // used context here as the list is shown depending on the Outlet component and outlet does not accept props
   const contextObject = useContext(cart);
+  // custom hook that fetches the data of all the games and return three variables
   const [gameData, loading, error] = useFetch(contextObject.selectedGenre);
+  // useReducer hook for setting the page number and the context in the page is shown based
+  // on the page we are on
   const [currentPage, dispatch] = useReducer(reducer, 1);
   const previousPage = currentPage - 1;
   const nextPage = currentPage + 1;
   const itemsPerPage = 10;
+  // index for which items are to be displayed on the page
   const startingIndex = previousPage * itemsPerPage;
   const endingIndex = currentPage * itemsPerPage;
+  // depending on the page we are on the button color changes to shown that the buttons are now disabled
   const buttonColorIf0 = previousPage !== 0 ? "bg-[#323232]" : "b-[#717171]";
   const buttonColorIf5 = nextPage !== 5 ? "bg-[#323232]" : "b-[#717171]";
+  // array containing the indexes of items to be displayed based on the current page
   let currentPageCards;
   if (gameData) {
     currentPageCards = gameData.slice(startingIndex, endingIndex);
   }
 
+  // if loading is true a loading animation is shown
   if (loading) {
     return (
       <div
@@ -62,14 +93,15 @@ const ProductList = () => {
     );
   }
 
-  if(error){
+  if (error) {
     return (
       <div
-      className="bg-black w-full h-[52rem] md:h-[52rem] text-white font-bold text-4xl flex justify-center items-center
-  overflow-y-scroll relative"
-    >Oops Some Error Occured
-    </div>
-    )
+        className="bg-black w-full h-[52rem] md:h-[52rem] text-white font-bold text-4xl flex justify-center items-center
+        overflow-y-scroll relative"
+      >
+        Oops Some Error Occured
+      </div>
+    );
   }
   return (
     <div
@@ -121,23 +153,7 @@ const ProductList = () => {
   );
 };
 
-const ProductMainPageBody = () => {
-  return (
-    <>
-      <SidePanel />
-      <ProductList />
-    </>
-  );
-};
-const ProductBody = () => {
-  return (
-    <>
-      <div className="flex">
-        <Outlet />
-      </div>
-    </>
-  );
-};
+
 
 export default ProductBody;
 export { ProductMainPageBody };

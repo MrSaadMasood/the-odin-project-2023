@@ -7,57 +7,18 @@ import { MdOutlineDeleteOutline } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 import { PropTypes } from "prop-types";
 
-const ItemsForCheckout = ({ item, quantityIncreaser }) => {
-  const navigate = useNavigate();
-  const pathToAddedItem = `Product_Description/${item.id}`;
-
-  function changePage() {
-    navigate(pathToAddedItem);
-  }
-
-  return (
-    <div className="mt-3 p-2  h-20 flex justify-start items-center  hover:bg-gray-400 cursor-pointer">
-      <div className="w-24" onClick={changePage}>
-        <img src={item.image} alt={item.name} />
-      </div>
-      <div
-        className="h-[4.3rem]  w-44 ml-1 flex flex-col justify-center items-start  text-sm overflow-hidden"
-        onClick={changePage}
-      >
-        <p className="text-lg w-44 font-bold overflow-hidden">{item.name}</p>
-        <p className="text-xs font-bold">Price : ${item.price}</p>
-        <p className="text-xs font-bold">Quantity : {item.quantity}</p>
-      </div>
-      <div className=" ml-1 h-16 w-[4rem] flex flex-col justify-between items-center">
-        <p className="text-sm font-bold">${item.quantity * item.price}</p>
-        <div className="flex justify-center items-center ">
-          <CiSquarePlus onClick={() => quantityIncreaser(item, "add")} />
-          <button
-            disabled={item.quantity === 1}
-            onClick={() => quantityIncreaser(item, "sub")}
-          >
-            <CiSquareMinus />
-          </button>
-          <MdOutlineDeleteOutline
-            onClick={() => quantityIncreaser(item, "del")}
-          />
-        </div>
-      </div>
-    </div>
-  );
-};
-
-
 const CartBar = ({
   isCartClicked,
   cartClickedSetter,
   totalItemsinCarts,
   totalPrice,
   itemsAddedtoCartList,
-  quantityIncreaser,
+  quantityManager,
   resetCart,
 }) => {
   const width = isCartClicked ? "w-full md:w-96" : "w-0";
+  // useNavigate hook is used so that when the user clicks the checkout button the user is redirected to the 
+  // checkout Page
   const navigate = useNavigate();
   function goToCheckOut() {
     if (totalItemsinCarts > 0) {
@@ -93,7 +54,7 @@ const CartBar = ({
                   <Fragment key={index}>
                     <ItemsForCheckout
                       item={item}
-                      quantityIncreaser={quantityIncreaser}
+                      quantityManager={quantityManager}
                     />
                   </Fragment>
                 );
@@ -122,18 +83,61 @@ const CartBar = ({
   );
 };
 
+
+const ItemsForCheckout = ({ item, quantityManager }) => {
+  // when the user clicks on the items in the cart and want to visit the product description page 
+  // use navigate hook navigates the user that page
+  const navigate = useNavigate();
+  const pathToAddedItem = `/Products/Product_Description/${item.id}`;
+
+  function changePage() {
+    navigate(pathToAddedItem);
+  }
+
+  return (
+    <div className="mt-3 p-2  h-20 flex justify-start items-center  hover:bg-gray-400 cursor-pointer">
+      <div className="w-24" onClick={changePage}>
+        <img src={item.image} alt={item.name} />
+      </div>
+      <div
+        className="h-[4.3rem]  w-44 ml-1 flex flex-col justify-center items-start  text-sm overflow-hidden"
+        onClick={changePage}
+      >
+        <p className="text-lg w-44 font-bold overflow-hidden">{item.name}</p>
+        <p className="text-xs font-bold">Price : ${item.price}</p>
+        <p className="text-xs font-bold">Quantity : {item.quantity}</p>
+      </div>
+      <div className=" ml-1 h-16 w-[4rem] flex flex-col justify-between items-center">
+        <p className="text-sm font-bold">${item.quantity * item.price}</p>
+        <div className="flex justify-center items-center ">
+          <CiSquarePlus onClick={() => quantityManager(item, "add")} />
+          <button
+            disabled={item.quantity === 1}
+            onClick={() => quantityManager(item, "sub")}
+          >
+            <CiSquareMinus />
+          </button>
+          <MdOutlineDeleteOutline
+            onClick={() => quantityManager(item, "del")}
+          />
+        </div>
+      </div>
+    </div>
+  );
+};
+
 CartBar.propTypes = {
   isCartClicked: PropTypes.bool,
   cartClickedSetter: PropTypes.func,
   totalItemsinCarts: PropTypes.number,
   totalPrice: PropTypes.number,
   itemsAddedtoCartList: PropTypes.object,
-  quantityIncreaser: PropTypes.func,
+  quantityManager: PropTypes.func,
   resetCart: PropTypes.func,
 };
 ItemsForCheckout.propTypes = {
   item: PropTypes.object,
-  quantityIncreaser: PropTypes.func,
+  quantityManager: PropTypes.func,
 };
 
 export default CartBar;

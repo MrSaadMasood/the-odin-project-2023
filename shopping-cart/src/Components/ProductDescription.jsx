@@ -11,9 +11,15 @@ import { cart } from "./cartContext";
 import ErrorPage from "./ErrorPage";
 
 const ProductDescription = () => {
+  // when the card is clicked the product id is used to fetch the details about that specific product and the user
+  // is redirected to this page. useParams hook is used to get the id which come enclosed in an object
+  // which is destructered to get the id
   const { productID } = useParams();
+  // custom hook to fetch the details based on the productID
   const [specificGame, loading, error] = useGameSearch(productID);
+  // state for the input value
   const [input, setInput] = useState(0);
+  // useContext hook is used as the parent is decided based on the Oulet Component of the react router
   const {
     totalItemsinCarts,
     setTotalItemsinCarts,
@@ -22,11 +28,14 @@ const ProductDescription = () => {
     setAddedGameInformation,
   } = useContext(cart);
 
+    // when add to cart is clicked the values and quantity are set based on the input field
   function cartValueCalculator() {
+
     setTotalItemsinCarts(totalItemsinCarts + input);
     const price = input * specificGame.playtime;
     setTotalPrice(totalPrice + price);
     setAddedGameInformation((addedGames) => {
+      // if the product already exists then the quantity is increased based on the input value
       if (addedGames.gameNames.includes(specificGame.name)) {
         const detailArray = addedGames.gameDetailsArray;
         for (let i = 0; i < detailArray.length; i++) {
@@ -35,7 +44,10 @@ const ProductDescription = () => {
             return addedGames;
           }
         }
-      } else {
+      } 
+      // if the product does not exist in the cart its name is added to the names array and
+      // details are added in details array
+      else {
         return {
           gameNames: [...addedGames.gameNames, specificGame.name],
           gameDetailsArray: [
@@ -53,11 +65,14 @@ const ProductDescription = () => {
     });
   }
 
+  // decreases the value of input by 1
   function decreaseValue() {
     if (input !== 0) {
       setInput(input - 1);
     }
   }
+
+  
   if (loading) {
     return (
       <div

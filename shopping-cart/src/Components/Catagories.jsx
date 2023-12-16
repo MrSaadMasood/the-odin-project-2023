@@ -10,7 +10,9 @@ import { GiSoccerBall } from "react-icons/gi";
 import { useContext } from "react";
 import { cart } from "./cartContext";
 const Catagories = () => {
+  // context value and the function inside the object is used to set the genre of the games searched
   const object = useContext(cart);
+  
   const categories = [
     { icon: <GiChaingun size={25} />, text: "Action", genres: "action" },
     { icon: <FaChessBishop size={25} />, text: "Strategy", genres: "strategy" },

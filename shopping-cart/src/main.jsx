@@ -3,12 +3,13 @@ import App from './App.jsx'
 import './index.css'
 import { createBrowserRouter, createRoutesFromElements, Route, RouterProvider } from "react-router-dom"
 import Home from './Components/Home.jsx'
-import Products from './Components/ProductsPage.jsx'
+import Products from './Components/ProductsMainPage.jsx'
 import ProductDescription from './Components/ProductDescription.jsx'
 import { ProductMainPageBody } from './Components/ProductBody.jsx'
 import ErrorPage from './Components/ErrorPage.jsx'
 import Checkout from './Components/Checkout.jsx'
 
+// created page routes
 const router = createBrowserRouter(
   createRoutesFromElements(
     <>

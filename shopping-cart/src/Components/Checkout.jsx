@@ -2,6 +2,8 @@ import { useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 
 export default function Checkout() {
+  // after the component is loaded the timer starts and useRef hook is used to hold the timeoutIDs and then 
+  // the user is redirected to the main page containing products
   const timeoutId = useRef(null);
   const navigate = useNavigate();
   useEffect(() => {
