@@ -10,7 +10,7 @@ module.exports = {
             console.log("connection successful");
             return callback()
         })
-        .catch((error, callback)=>{
+        .catch((error)=>{
            console.log(error) 
             return callback(error)
         }) 
