@@ -19,6 +19,7 @@ const Header = ({ cartClickedSetter, totalItemsinCarts }) => {
       <div
         className="cart w-2 absolute top-[28%] right-12 lg:right-14 cursor-pointer"
         onClick={cartClickedSetter}
+       data-testid={"cart"} 
       >
         <div className="flex w-12 relative">
           <CiShoppingCart className="hover:scale-105" size={40} color="white" />
@@ -49,3 +50,4 @@ Counter.propTypes = {
   value: PropTypes.number,
 };
 export default Header;
+export { Counter};

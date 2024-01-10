@@ -15,6 +15,7 @@ const ProductDescription = () => {
   // is redirected to this page. useParams hook is used to get the id which come enclosed in an object
   // which is destructered to get the id
   const { productID } = useParams();
+  // console.log(productID);
   // custom hook to fetch the details based on the productID
   const [specificGame, loading, error] = useGameSearch(productID);
   // state for the input value
@@ -96,6 +97,8 @@ const ProductDescription = () => {
   if (error) {
     return <ErrorPage />;
   }
+  if(specificGame){
+
   return (
     <div
       className="bg-black w-full h-[56rem] noScroll overflow-hidden md:h-[52rem] text-white flex flex-col justify-start items-center
@@ -138,16 +141,19 @@ const ProductDescription = () => {
         <div className="w-[70%] lg:w-[90%] flex justify-evenly items-center text-3xl ">
           <CiCirclePlus
             className="cursor-pointer hover:scale-110"
+            data-testid="increaser"
             onClick={() => setInput(input + 1)}
           />
           <input
             className="w-28 rounded-2xl h-12 p-2 text-black"
             type="number"
+            data-testid="input"
             value={input}
             onChange={(e) => setInput(e.target.value)}
           />
           <CiCircleMinus
             className="cursor-pointer hover:scale-110"
+            data-testid="decreaser"
             onClick={decreaseValue}
           />
         </div>
@@ -174,4 +180,5 @@ const ProductDescription = () => {
   );
 };
 
+  }
 export default ProductDescription;

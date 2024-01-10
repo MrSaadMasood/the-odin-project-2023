@@ -21,10 +21,8 @@ const CartBar = ({
   // checkout Page
   const navigate = useNavigate();
   function goToCheckOut() {
-    if (totalItemsinCarts > 0) {
       navigate("/checkout");
       resetCart();
-    }
   }
   return (
     <div
@@ -72,6 +70,8 @@ const CartBar = ({
           <div className="w-[100%] flex justify-center items-center p-3 ">
             <button
               className="w-[100%] mt-3 h-8 flex justify-center items-center text-white bg-black"
+              data-testid={"checkoutFunciton"}
+              disabled={totalItemsinCarts === 0}
               onClick={goToCheckOut}
             >
               Checkout
@@ -102,7 +102,7 @@ const ItemsForCheckout = ({ item, quantityManager }) => {
       <div
         className="h-[4.3rem]  w-44 ml-1 flex flex-col justify-center items-start  text-sm overflow-hidden"
         onClick={changePage}
-      >
+        data-testid={"changePage"} >
         <p className="text-lg h-8 w-44 font-bold overflow-hidden">{item.name}</p>
         <p className="text-xs font-bold">Price : ${item.price}</p>
         <p className="text-xs font-bold">Quantity : {item.quantity}</p>
@@ -140,4 +140,5 @@ ItemsForCheckout.propTypes = {
   quantityManager: PropTypes.func,
 };
 
+export {ItemsForCheckout}
 export default CartBar;

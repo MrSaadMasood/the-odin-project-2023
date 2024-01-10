@@ -103,15 +103,19 @@ const ProductList = () => {
       </div>
     );
   }
+  if(currentPageCards){
+
   return (
     <div
       className="noScroll bg-black w-full md:w-[70%] lg:w-[75%] xl:w-[82%] md:h-[52rem] flex flex-col justify-start items-center
         overflow-y-scroll relative"
     >
-      <div className="text-white text-7xl flex justify-center items-center font-bold w-full bg-black mt-2">
+      <div className="text-white text-7xl flex justify-center items-center font-bold w-full bg-black mt-2"
+     >
         Products
       </div>
-      <div className="w-[100%] flex justify-start flex-wrap items-center mb-5">
+      <div className="w-[100%] flex justify-start flex-wrap items-center mb-5"
+      data-testid="products" >
         {currentPageCards.map((game, index) => {
           return (
             <Fragment key={index}>
@@ -152,8 +156,11 @@ const ProductList = () => {
     </div>
   );
 };
+  }
 
 
 
 export default ProductBody;
 export { ProductMainPageBody };
+export { SidePanel}
+export { ProductList}

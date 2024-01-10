@@ -24,7 +24,6 @@ const useFetch = (genre) => {
       })
       .catch((error) => setError(error));
   }, [genre]);
-
   return [gameData, loading, error];
 };
 
