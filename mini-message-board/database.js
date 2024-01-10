@@ -1,10 +1,10 @@
 const { MongoClient} = require('mongodb')
 
 let connection;
-const url = "mongodb+srv://myAtlasDBUser:test@myatlasclusteredu.h2zv3ri.mongodb.net/?retryWrites=true&w=majority"
+const mongoURL = process.env.MONGO_URL
 module.exports = {
     connectData : (callback)=>{
-        MongoClient.connect(url)
+        MongoClient.connect(mongoURL)
         .then((result)=>{
             connection = result.db("mini-messages")
             console.log("connection successful");
