@@ -66,7 +66,6 @@ const mockedUseNavigate = jest.fn()
 })
 
 test("it renders the catagories component", ()=>{
-    // renderCatagories(contextData)
     render(<Catagories/>)
     const shownElement = screen.getByText("Action")
     expect(shownElement).toHaveTextContent("Action")
